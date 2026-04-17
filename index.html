@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InterNova • Internships in Kyrgyzstan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f0c1f 0%, #1a1a2e 50%, #16213e 100%);
+            color: #eef2ff;
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(15, 25, 45, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            background: rgba(25, 40, 65, 0.8);
+            border-color: rgba(100, 150, 255, 0.4);
+            transform: translateY(-4px);
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .header { text-align: center; margin-bottom: 3rem; }
+        .logo {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a0c0ff, #4c7aff, #a855f7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .tagline { color: #9ca3cf; margin-top: 0.75rem; }
+        .stats-badge {
+            display: inline-block;
+            background: rgba(100, 120, 200, 0.2);
+            border-radius: 100px;
+            padding: 0.3rem 1rem;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+        .filter-group { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-bottom: 1rem; }
+        .filter-btn {
+            background: rgba(30, 40, 65, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.6rem 1.3rem;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #ccd6f6;
+        }
+        .filter-btn.active {
+            background: linear-gradient(135deg, #4c7aff, #8855ff);
+            color: white;
+        }
+        .search-box { max-width: 450px; margin: 1rem auto 0; position: relative; }
+        .search-box input {
+            width: 100%;
+            padding: 0.9rem 1rem 0.9rem 2.8rem;
+            background: rgba(20, 28, 45, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 60px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        .search-box i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #7a8bbf; }
+        .internships-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.8rem; }
+        .internship-card { padding: 1.5rem; display: flex; flex-direction: column; }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+        .company-icon {
+            width: 48px; height: 48px;
+            background: linear-gradient(145deg, #1e2a4a, #0f172f);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+        .badge { font-size: 0.7rem; padding: 0.25rem 0.7rem; border-radius: 30px; font-weight: 600; background: rgba(0,0,0,0.4); }
+        .badge.paid { background: #1e7a5c; color: #ccf7e6; }
+        .badge.unpaid { background: #7f4e2e; color: #ffe0c4; }
+        .badge.remote { background: #2c3e66; color: #bdd3ff; }
+        .badge.on-site { background: #4a2e5e; color: #e9c4ff; }
+        .internship-title { font-size: 1.25rem; font-weight: 700; margin: 0.75rem 0 0.5rem; }
+        .company-name { color: #9bb4ff; font-size: 0.85rem; margin-bottom: 0.75rem; }
+        .description { font-size: 0.85rem; color: #cbd5f0; margin: 0.75rem 0; line-height: 1.5; }
+        .deadline { font-size: 0.7rem; color: #f5b042; background: rgba(245, 176, 66, 0.1); display: inline-block; padding: 0.2rem 0.6rem; border-radius: 30px; margin: 0.5rem 0; }
+        .apply-btn {
+            margin-top: 1rem;
+            background: rgba(76, 122, 255, 0.2);
+            border: 1px solid rgba(76, 122, 255, 0.5);
+            color: white;
+            padding: 0.65rem;
+            border-radius: 40px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            transition: 0.2s;
+        }
+        .apply-btn:hover { background: #4c7aff; }
+        .no-results { text-align: center; padding: 4rem; grid-column: 1 / -1; background: rgba(0,0,0,0.2); border-radius: 2rem; }
+        footer { text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); color: #7e8bb3; font-size: 0.8rem; }
+        @media (max-width: 700px) { .container { padding: 1rem; } .internships-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="logo"><i class="fas fa-seedling"></i> InterNova</div>
+        <div class="tagline">Your bridge to real internships in Kyrgyzstan</div>
+        <div class="stats-badge" id="statsCount">🎓 Loading opportunities...</div>
+    </div>
+
+    <div class="filters-section">
+        <div class="filter-group" id="filterButtons">
+            <button class="filter-btn active" data-filter="all">✨ All</button>
+            <button class="filter-btn" data-filter="paid">💰 Paid</button>
+            <button class="filter-btn" data-filter="unpaid">📚 Unpaid / Stipend</button>
+            <button class="filter-btn" data-filter="remote">🌍 Remote</button>
+            <button class="filter-btn" data-filter="on-site">🏢 On-site</button>
+            <button class="filter-btn" data-filter="IT">💻 IT & Tech</button>
+            <button class="filter-btn" data-filter="Communications">📢 Comms & Media</button>
+            <button class="filter-btn" data-filter="NGO">🌱 NGO / UN</button>
+        </div>
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search by company, role, or keyword...">
+        </div>
+    </div>
+
+    <div class="internships-grid" id="internshipsGrid"></div>
+    <footer><i class="fas fa-shield-alt"></i> Verified opportunities • Updated April 2026 • For students & grads</footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+    let currentFilter = "all";
+    let currentSearch = "";
+
+    function renderInternships() {
+        const grid = document.getElementById("internshipsGrid");
+        if (!grid) return;
+
+        let filtered = internshipsData.filter(intern => {
+            if (currentFilter === "paid") return intern.paid === "paid";
+            if (currentFilter === "unpaid") return intern.paid === "unpaid";
+            if (currentFilter === "remote") return intern.type === "remote";
+            if (currentFilter === "on-site") return intern.type === "on-site";
+            if (currentFilter === "IT") return intern.category.includes("IT");
+            if (currentFilter === "Communications") return intern.category.includes("Communications");
+            if (currentFilter === "NGO") return intern.category.includes("NGO");
+            return true;
+        });
+
+        if (currentSearch.trim() !== "") {
+            const q = currentSearch.toLowerCase();
+            filtered = filtered.filter(intern =>
+                intern.title.toLowerCase().includes(q) ||
+                intern.company.toLowerCase().includes(q) ||
+                intern.description.toLowerCase().includes(q) ||
+                intern.tags.toLowerCase().includes(q)
+            );
+        }
+
+        document.getElementById("statsCount").innerHTML = `🎓 ${internshipsData.length} verified opportunities • showing ${filtered.length}`;
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `<div class="no-results"><i class="fas fa-compass" style="font-size:2rem"></i><p style="margin-top:1rem">No matching internships. Try different filters 🔍</p></div>`;
+            return;
+        }
+
+        grid.innerHTML = filtered.map(intern => `
+            <div class="internship-card glass-card">
+                <div class="card-header">
+                    <div class="company-icon"><i class="fas ${intern.category.includes('IT') ? 'fa-code' : (intern.category.includes('NGO') ? 'fa-globe' : 'fa-briefcase')}"></i></div>
+                    <div class="badge-group">
+                        <span class="badge ${intern.paid}">${intern.paid === 'paid' ? '💰 Paid' : '📘 Unpaid / Stipend'}</span>
+                        <span class="badge ${intern.type}">${intern.type === 'remote' ? '🌍 Remote' : '🏢 On-site'}</span>
+                    </div>
+                </div>
+                <div class="internship-title">${intern.title}</div>
+                <div class="company-name"><i class="fas fa-building"></i> ${intern.company}</div>
+                <div class="description">${intern.description}</div>
+                ${intern.deadline ? `<div class="deadline"><i class="far fa-calendar-alt"></i> ⏰ ${intern.deadline}</div>` : ""}
+                <a href="${intern.applyLink}" target="_blank" class="apply-btn"><i class="fas fa-paper-plane"></i> Apply now →</a>
+            </div>
+        `).join('');
+    }
+
+    function updateUI() { renderInternships(); }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        renderInternships();
+        document.querySelectorAll(".filter-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                currentFilter = btn.getAttribute("data-filter");
+                updateUI();
+            });
+        });
+        document.getElementById("searchInput").addEventListener("input", (e) => {
+            currentSearch = e.target.value;
+            updateUI();
+        });
+    });
+</script>
+</body>
+</html>
