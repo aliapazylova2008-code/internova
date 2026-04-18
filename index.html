@@ -2,214 +2,653 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>InterNova • Internships in Kyrgyzstan</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f0c1f 0%, #1a1a2e 50%, #16213e 100%);
-            color: #eef2ff;
+            background: linear-gradient(135deg, #0a0a1a 0%, #0f0f23 50%, #14142e 100%);
+            color: #edf2ff;
             min-height: 100vh;
         }
-        .glass-card {
-            background: rgba(15, 25, 45, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1.5rem;
-            transition: all 0.3s ease;
+
+        /* Animated gradient background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(76, 122, 255, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
-        .glass-card:hover {
-            background: rgba(25, 40, 65, 0.8);
-            border-color: rgba(100, 150, 255, 0.4);
-            transform: translateY(-4px);
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            position: relative;
+            z-index: 1;
         }
-        .container { max-width: 1400px; margin: 0 auto; padding: 2rem 1.5rem; }
-        .header { text-align: center; margin-bottom: 3rem; }
+
+        /* ========== HEADER ========== */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
         .logo {
-            font-size: 3rem;
+            font-size: 3.2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #a0c0ff, #4c7aff, #a855f7);
+            background: linear-gradient(135deg, #c0e0ff, #6c8eff, #c084fc);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            letter-spacing: -0.02em;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
         }
-        .tagline { color: #9ca3cf; margin-top: 0.75rem; }
-        .stats-badge {
-            display: inline-block;
-            background: rgba(100, 120, 200, 0.2);
-            border-radius: 100px;
-            padding: 0.3rem 1rem;
+
+        .logo i {
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            color: #7c8eff;
+        }
+
+        .tagline {
+            color: #8e9ed0;
+            margin-top: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .stat-card {
+            background: rgba(30, 40, 70, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 60px;
+            padding: 0.5rem 1.2rem;
             font-size: 0.85rem;
-            margin-top: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .filter-group { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-bottom: 1rem; }
-        .filter-btn {
-            background: rgba(30, 40, 65, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.6rem 1.3rem;
-            border-radius: 40px;
-            font-weight: 500;
+
+        .stat-card i {
+            margin-right: 8px;
+            color: #6c8eff;
+        }
+
+        /* ========== FILTERS SECTION ========== */
+        .filters-panel {
+            background: rgba(15, 20, 35, 0.6);
+            backdrop-filter: blur(12px);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .filter-row {
+            display: flex;
+flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .filter-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8e9ed0;
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .filter-select, .filter-input {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .filter-select option {
+            background: #1a1a2e;
+        }
+
+        .filter-input::placeholder {
+            color: #5a6a9a;
+        }
+
+        .search-input {
+            flex: 2;
+        }
+
+        .reset-btn {
+            background: rgba(255, 100, 100, 0.15);
+            border: 1px solid rgba(255, 100, 100, 0.3);
+            padding: 0.7rem 1.2rem;
+            border-radius: 12px;
+            color: #ff9e9e;
             cursor: pointer;
             transition: 0.2s;
-            color: #ccd6f6;
+            margin-top: 1.5rem;
+            width: auto;
         }
-        .filter-btn.active {
+
+        .reset-btn:hover {
+            background: rgba(255, 100, 100, 0.3);
+        }
+
+        .filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .chip {
+            background: rgba(50, 60, 100, 0.4);
+            border-radius: 30px;
+            padding: 0.3rem 0.9rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .chip.active {
             background: linear-gradient(135deg, #4c7aff, #8855ff);
             color: white;
         }
-        .search-box { max-width: 450px; margin: 1rem auto 0; position: relative; }
-        .search-box input {
-            width: 100%;
-            padding: 0.9rem 1rem 0.9rem 2.8rem;
-            background: rgba(20, 28, 45, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 60px;
-            color: white;
-            font-family: 'Inter', sans-serif;
+
+        .chip:hover {
+            background: rgba(76, 122, 255, 0.5);
         }
-        .search-box i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #7a8bbf; }
-        .internships-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.8rem; }
-        .internship-card { padding: 1.5rem; display: flex; flex-direction: column; }
-        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+
+        /* ========== INTERNSHIP CARDS ========== */
+        .internships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .internship-card {
+            background: rgba(20, 28, 45, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 1.3rem;
+            transition: all 0.25s ease;
+        }
+
+        .internship-card:hover {
+            transform: translateY(-4px);
+            background: rgba(30, 40, 65, 0.85);
+            border-color: rgba(108, 142, 255, 0.3);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+        }
+
+        .company-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .company-icon {
-            width: 48px; height: 48px;
-            background: linear-gradient(145deg, #1e2a4a, #0f172f);
-            border-radius: 18px;
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(145deg, #252e4a, #13172e);
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
+            font-size: 1.3rem;
         }
-        .badge { font-size: 0.7rem; padding: 0.25rem 0.7rem; border-radius: 30px; font-weight: 600; background: rgba(0,0,0,0.4); }
-        .badge.paid { background: #1e7a5c; color: #ccf7e6; }
-        .badge.unpaid { background: #7f4e2e; color: #ffe0c4; }
-        .badge.remote { background: #2c3e66; color: #bdd3ff; }
-        .badge.on-site { background: #4a2e5e; color: #e9c4ff; }
-        .internship-title { font-size: 1.25rem; font-weight: 700; margin: 0.75rem 0 0.5rem; }
-        .company-name { color: #9bb4ff; font-size: 0.85rem; margin-bottom: 0.75rem; }
-        .description { font-size: 0.85rem; color: #cbd5f0; margin: 0.75rem 0; line-height: 1.5; }
-        .deadline { font-size: 0.7rem; color: #f5b042; background: rgba(245, 176, 66, 0.1); display: inline-block; padding: 0.2rem 0.6rem; border-radius: 30px; margin: 0.5rem 0; }
+
+        .company-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #b8c4ff;
+        }
+
+        .badges {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .badge {
+            font-size: 0.65rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .badge-paid { background: #1e7a5c; color: #ccf7e6; }
+        .badge-unpaid { background: #7f4e2e; color: #ffe0c4; }
+        .badge-remote { background: #2c3e66; color: #bdd3ff; }
+        .badge-onsite { background: #4a2e5e; color: #e9c4ff; }
+        .badge-hybrid { background: #5a4a2e; color: #ffe0b0; }
+        .badge-highschool { background: #3a5a6e; color: #cceeff; }
+        .badge-undergrad { background: #3a6e5a; color: #ccffdd; }
+        .badge-graduate { background: #6e3a5a; color: #ffccdd; }
+
+        .internship-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 0.7rem 0 0.4rem;
+            line-height: 1.4;
+        }
+
+        .description {
+            font-size: 0.8rem;
+            color: #aab4dc;
+            margin: 0.6rem 0;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .meta-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 0.6rem 0;
+            font-size: 0.7rem;
+            color: #7c8aba;
+        }
+
+        .meta-info i {
+            margin-right: 4px;
+            width: 14px;
+        }
+
+        .deadline {
+            font-size: 0.7rem;
+            color: #f5b042;
+            background: rgba(245, 176, 66, 0.1);
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            margin: 0.4rem 0;
+        }
+
         .apply-btn {
-            margin-top: 1rem;
+            margin-top: 0.8rem;
             background: rgba(76, 122, 255, 0.2);
-            border: 1px solid rgba(76, 122, 255, 0.5);
+            border: 1px solid rgba(76, 122, 255, 0.4);
             color: white;
-            padding: 0.65rem;
+            padding: 0.6rem;
             border-radius: 40px;
             font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
             text-align: center;
             text-decoration: none;
             display: block;
-            transition: 0.2s;
         }
-        .apply-btn:hover { background: #4c7aff; }
-        .no-results { text-align: center; padding: 4rem; grid-column: 1 / -1; background: rgba(0,0,0,0.2); border-radius: 2rem; }
-        footer { text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); color: #7e8bb3; font-size: 0.8rem; }
-        @media (max-width: 700px) { .container { padding: 1rem; } .internships-grid { grid-template-columns: 1fr; } }
+
+        .apply-btn:hover {
+            background: #4c7aff;
+            border-color: #4c7aff;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            grid-column: 1 / -1;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 1.5rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #6a7aaa;
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 760px) {
+            .container { padding: 1rem; }
+            .internships-grid { grid-template-columns: 1fr; }
+            .filter-row { flex-direction: column; }
+            .filter-group { width: 100%; }
+            .stats-bar { gap: 0.8rem; }
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <div class="logo"><i class="fas fa-seedling"></i> InterNova</div>
+        <div class="logo">
+            <i class="fas fa-seedling"></i> InterNova
+        </div>
         <div class="tagline">Your bridge to real internships in Kyrgyzstan</div>
-        <div class="stats-badge" id="statsCount">🎓 Loading opportunities...</div>
-    </div>
-
-    <div class="filters-section">
-        <div class="filter-group" id="filterButtons">
-            <button class="filter-btn active" data-filter="all">✨ All</button>
-            <button class="filter-btn" data-filter="paid">💰 Paid</button>
-            <button class="filter-btn" data-filter="unpaid">📚 Unpaid / Stipend</button>
-            <button class="filter-btn" data-filter="remote">🌍 Remote</button>
-            <button class="filter-btn" data-filter="on-site">🏢 On-site</button>
-            <button class="filter-btn" data-filter="IT">💻 IT & Tech</button>
-            <button class="filter-btn" data-filter="Communications">📢 Comms & Media</button>
-            <button class="filter-btn" data-filter="NGO">🌱 NGO / UN</button>
-        </div>
-        <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" id="searchInput" placeholder="Search by company, role, or keyword...">
+        <div class="stats-bar" id="statsBar">
+            <div class="stat-card"><i class="fas fa-briefcase"></i> <span id="totalCount">0</span> opportunities</div>
+            <div class="stat-card"><i class="fas fa-money-bill-wave"></i> <span id="paidCount">0</span> paid</div>
+            <div class="stat-card"><i class="fas fa-globe"></i> <span id="remoteCount">0</span> remote</div>
         </div>
     </div>
 
-    <div class="internships-grid" id="internshipsGrid"></div>
-    <footer><i class="fas fa-shield-alt"></i> Verified opportunities • Updated April 2026 • For students & grads</footer>
+    <div class="filters-panel">
+        <div class="filter-row">
+            <div class="filter-group search-input">
+                <div class="filter-label"><i class="fas fa-search"></i> Search company or role</div>
+                <input type="text" id="searchCompanyInput" class="filter-input" placeholder="e.g., Kumtor, Beeline, UNDP...">
+            </div>
+            <div class="filter-group">
+                <div class="filter-label"><i class="fas fa-tag"></i> Career stage</div>
+                <select id="ageFilter" class="filter-select">
+                    <option value="all">All stages</option>
+                    <option value="highschool">🎓 High school student</option>
+                    <option value="undergrad">📚 Undergraduate student</option>
+                    <option value="graduate">🎓 Graduate / Recent grad</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <div class="filter-label"><i class="fas fa-coins"></i> Payment</div>
+                <select id="paidFilter" class="filter-select">
+                    <option value="all">All</option>
+                    <option value="paid">💰 Paid only</option>
+                    <option value="unpaid">📘 Unpaid / Stipend only</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <div class="filter-label"><i class="fas fa-location-dot"></i> Location type</div>
+                <select id="locationTypeFilter" class="filter-select">
+                    <option value="all">All</option>
+                    <option value="on-site">🏢 On-site</option>
+                    <option value="remote">🌍 Remote</option>
+                    <option value="hybrid">🔄 Hybrid</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <div class="filter-label"><i class="fas fa-city"></i> City / Region</div>
+                <select id="cityFilter" class="filter-select">
+                    <option value="all">All cities</option>
+                    <option value="Bishkek">🏙️ Bishkek</option>
+                    <option value="Osh">🕌 Osh</option>
+                    <option value="Karakol">⛰️ Karakol</option>
+                    <option value="Naryn">🏔️ Naryn</option>
+                    <option value="Remote">🌍 Remote (anywhere)</option>
+                    <option value="Nationwide">🇰🇬 Nationwide</option>
+                </select>
+            </div>
+        </div>
+        <div class="filter-chips" id="categoryChips">
+            <span class="chip active" data-cat="all">✨ All</span>
+            <span class="chip" data-cat="IT">💻 IT & Tech</span>
+            <span class="chip" data-cat="NGO">🌱 NGO / UN</span>
+            <span class="chip" data-cat="Communications">📢 Comms & Media</span>
+            <span class="chip" data-cat="Banking">🏦 Banking</span>
+            <span class="chip" data-cat="Mining">⛏️ Mining</span>
+            <span class="chip" data-cat="Consulting">📊 Consulting</span>
+        </div>
+        <div style="text-align: center; margin-top: 1rem;">
+            <button id="resetFiltersBtn" class="reset-btn"><i class="fas fa-undo-alt"></i> Reset all filters</button>
+        </div>
+    </div>
+
+    <div class="internships-grid" id="internshipsGrid">
+        <div class="no-results">Loading internships...</div>
+    </div>
+    <footer>
+        <i class="fas fa-shield-alt"></i> Verified opportunities • Updated April 2026 • For students & graduates
+    </footer>
 </div>
 
 <script src="data.js"></script>
 <script>
-    let currentFilter = "all";
-    let currentSearch = "";
+    // Get the data from data.js
+    let internships = typeof internshipsData !== 'undefined' ? internshipsData : [];
 
+    // Filter state
+    let filters = {
+        searchCompany: "",
+        age: "all",
+        paid: "all",
+        locationType: "all",
+        city: "all",
+        category: "all"
+    };
+
+    // Function to determine career stage from description/tags
+    function getCareerStage(intern) {
+        const text = (intern.title + " " + intern.description + " " + (intern.tags || "")).toLowerCase();
+        if (text.includes("high school") || text.includes("highschool") || text.includes("age 16")) return "highschool";
+        if (text.includes("graduate") || text.includes("recent grad") || text.includes("master") || text.includes("phd") || text.includes("bachelor's final year")) return "graduate";
+        return "undergrad";
+    }
+
+    // Function to extract city from location string
+    function getCity(intern) {
+        const loc = intern.location.toLowerCase();
+        if (loc.includes("remote")) return "Remote";
+        if (loc.includes("osh")) return "Osh";
+        if (loc.includes("karakol")) return "Karakol";
+        if (loc.includes("naryn")) return "Naryn";
+        if (loc.includes("nationwide") || loc.includes("30 cities") || loc.includes("pilot")) return "Nationwide";
+        return "Bishkek";
+    }
+
+    // Function to get category from intern's category array
+    function getMainCategory(intern) {
+        if (!intern.category) return "Other";
+        if (intern.category.includes("IT")) return "IT";
+        if (intern.category.includes("NGO")) return "NGO";
+        if (intern.category.includes("Mining")) return "Mining";
+        if (intern.category.includes("Banking")) return "Banking";
+        if (intern.category.includes("Consulting")) return "Consulting";
+        if (intern.category.includes("Communications")) return "Communications";
+        return "Other";
+    }
+
+    // Render internships based on filters
     function renderInternships() {
         const grid = document.getElementById("internshipsGrid");
         if (!grid) return;
 
-        let filtered = internshipsData.filter(intern => {
-            if (currentFilter === "paid") return intern.paid === "paid";
-            if (currentFilter === "unpaid") return intern.paid === "unpaid";
-            if (currentFilter === "remote") return intern.type === "remote";
-            if (currentFilter === "on-site") return intern.type === "on-site";
-            if (currentFilter === "IT") return intern.category.includes("IT");
-            if (currentFilter === "Communications") return intern.category.includes("Communications");
-            if (currentFilter === "NGO") return intern.category.includes("NGO");
+        let filtered = internships.filter(intern => {
+            // Search by company name
+            if (filters.searchCompany && !intern.company.toLowerCase().includes(filters.searchCompany.toLowerCase())) {
+                return false;
+            }
+
+            // Career stage filter
+            if (filters.age !== "all") {
+                const stage = getCareerStage(intern);
+                if (stage !== filters.age) return false;
+            }
+
+            // Paid filter
+            if (filters.paid !== "all") {
+                if (intern.paid !== filters.paid) return false;
+            }
+
+            // Location type filter
+            if (filters.locationType !== "all") {
+                if (intern.type !== filters.locationType) return false;
+            }
+
+            // City filter
+            if (filters.city !== "all") {
+                const city = getCity(intern);
+                if (city !== filters.city) return false;
+            }
+
+            // Category filter
+            if (filters.category !== "all") {
+                const cat = getMainCategory(intern);
+                if (cat !== filters.category) return false;
+            }
+
             return true;
         });
 
-        if (currentSearch.trim() !== "") {
-            const q = currentSearch.toLowerCase();
-            filtered = filtered.filter(intern =>
-                intern.title.toLowerCase().includes(q) ||
-                intern.company.toLowerCase().includes(q) ||
-                intern.description.toLowerCase().includes(q) ||
-                intern.tags.toLowerCase().includes(q)
-            );
-        }
-
-        document.getElementById("statsCount").innerHTML = `🎓 ${internshipsData.length} verified opportunities • showing ${filtered.length}`;
+        // Update stats
+        document.getElementById("totalCount").innerText = filtered.length;
+        document.getElementById("paidCount").innerText = internships.filter(i => i.paid === "paid").length;
+        document.getElementById("remoteCount").innerText = internships.filter(i => i.type === "remote").length;
 
         if (filtered.length === 0) {
-            grid.innerHTML = `<div class="no-results"><i class="fas fa-compass" style="font-size:2rem"></i><p style="margin-top:1rem">No matching internships. Try different filters 🔍</p></div>`;
+            grid.innerHTML = `<div class="no-results"><i class="fas fa-compass" style="font-size: 2rem; opacity: 0.6;"></i><p style="margin-top: 1rem;">No internships match your filters. Try adjusting your search! 🔍</p></div>`;
             return;
         }
 
-        grid.innerHTML = filtered.map(intern => `
-            <div class="internship-card glass-card">
-                <div class="card-header">
-                    <div class="company-icon"><i class="fas ${intern.category.includes('IT') ? 'fa-code' : (intern.category.includes('NGO') ? 'fa-globe' : 'fa-briefcase')}"></i></div>
-                    <div class="badge-group">
-                        <span class="badge ${intern.paid}">${intern.paid === 'paid' ? '💰 Paid' : '📘 Unpaid / Stipend'}</span>
-                        <span class="badge ${intern.type}">${intern.type === 'remote' ? '🌍 Remote' : '🏢 On-site'}</span>
+        grid.innerHTML = filtered.map(intern => {
+            const city = getCity(intern);
+            const category = getMainCategory(intern);
+            const stage = getCareerStage(intern);
+            let stageBadge = "";
+            if (stage === "highschool") stageBadge = '<span class="badge badge-highschool">🎓 High school</span>';
+            else if (stage === "graduate") stageBadge = '<span class="badge badge-graduate">🎓 Graduate</span>';
+            else stageBadge = '<span class="badge badge-undergrad">📚 Undergraduate</span>';
+
+            return `
+                <div class="internship-card">
+                    <div class="card-header">
+                        <div class="company-badge">
+                            <div class="company-icon">
+                                <i class="fas ${intern.category && intern.category.includes('IT') ? 'fa-code' : (intern.category && intern.category.includes('NGO') ? 'fa-globe' : 'fa-building')}"></i>
+                            </div>
+                            <div class="company-name">${intern.company}</div>
+                        </div>
+                        <div class="badges">
+                            <span class="badge ${intern.paid === 'paid' ? 'badge-paid' : 'badge-unpaid'}">${intern.paid === 'paid' ? '💰 Paid' : '📘 Unpaid'}</span>
+                            <span class="badge ${intern.type === 'remote' ? 'badge-remote' : 'badge-onsite'}">${intern.type === 'remote' ? '🌍 Remote' : '🏢 On-site'}</span>
+                            ${stageBadge}
+                        </div>
                     </div>
+                    <div class="internship-title">${intern.title}</div>
+                    <div class="meta-info">
+                        <span><i class="fas fa-map-marker-alt"></i> ${city}</span>
+                        <span><i class="fas fa-tag"></i> ${category}</span>
+                    </div>
+                    <div class="description">${intern.description.substring(0, 120)}${intern.description.length > 120 ? '...' : ''}</div>
+                    ${intern.deadline ? `<div class="deadline"><i class="far fa-calendar-alt"></i> ⏰ ${intern.deadline}</div>` : ""}
+                    <a href="${intern.applyLink}" target="_blank" class="apply-btn"><i class="fas fa-paper-plane"></i> Apply now →</a>
                 </div>
-                <div class="internship-title">${intern.title}</div>
-                <div class="company-name"><i class="fas fa-building"></i> ${intern.company}</div>
-                <div class="description">${intern.description}</div>
-                ${intern.deadline ? `<div class="deadline"><i class="far fa-calendar-alt"></i> ⏰ ${intern.deadline}</div>` : ""}
-                <a href="${intern.applyLink}" target="_blank" class="apply-btn"><i class="fas fa-paper-plane"></i> Apply now →</a>
-            </div>
-        `).join('');
+            `;
+        }).join('');
     }
 
-    function updateUI() { renderInternships(); }
-
-    document.addEventListener("DOMContentLoaded", () => {
+    // Update UI when filters change
+    function updateFilters() {
         renderInternships();
-        document.querySelectorAll(".filter-btn").forEach(btn => {
-            btn.addEventListener("click", () => {
-                document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                currentFilter = btn.getAttribute("data-filter");
-                updateUI();
+    }
+
+    // Set up event listeners
+    document.addEventListener("DOMContentLoaded", () => {
+        // Wait a tiny bit for data.js to load
+        setTimeout(() => {
+            if (typeof internshipsData !== 'undefined') {
+                internships = internshipsData;
+            }
+            renderInternships();
+        }, 100);
+
+        // Search input
+        document.getElementById("searchCompanyInput").addEventListener("input", (e) => {
+            filters.searchCompany = e.target.value;
+            renderInternships();
+        });
+
+        // Age filter
+        document.getElementById("ageFilter").addEventListener("change", (e) => {
+            filters.age = e.target.value;
+            renderInternships();
+        });
+
+        // Paid filter
+        document.getElementById("paidFilter").addEventListener("change", (e) => {
+            filters.paid = e.target.value;
+            renderInternships();
+        });
+
+        // Location type filter
+        document.getElementById("locationTypeFilter").addEventListener("change", (e) => {
+            filters.locationType = e.target.value;
+            renderInternships();
+        });
+
+        // City filter
+        document.getElementById("cityFilter").addEventListener("change", (e) => {
+            filters.city = e.target.value;
+            renderInternships();
+        });
+
+        // Category chips
+        document.querySelectorAll(".chip").forEach(chip => {
+            chip.addEventListener("click", () => {
+                document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+                chip.classList.add("active");
+                filters.category = chip.getAttribute("data-cat");
+                renderInternships();
             });
         });
-        document.getElementById("searchInput").addEventListener("input", (e) => {
-            currentSearch = e.target.value;
-            updateUI();
+
+        // Reset button
+        document.getElementById("resetFiltersBtn").addEventListener("click", () => {
+            filters = {
+                searchCompany: "",
+                age: "all",
+                paid: "all",
+                locationType: "all",
+                city: "all",
+                category: "all"
+            };
+            document.getElementById("searchCompanyInput").value = "";
+            document.getElementById("ageFilter").value = "all";
+            document.getElementById("paidFilter").value = "all";
+            document.getElementById("locationTypeFilter").value = "all";
+            document.getElementById("cityFilter").value = "all";
+            document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+            document.querySelector(".chip[data-cat='all']").classList.add("active");
+            renderInternships();
         });
     });
 </script>
